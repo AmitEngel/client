@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'bestshoppingapi.onrender.com/api',
+  apiUrl: 'https://bestshoppingapi.onrender.com/api',
 };
