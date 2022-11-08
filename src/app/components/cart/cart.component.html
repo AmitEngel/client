@@ -3,7 +3,7 @@
   <span fxLayoutAlign="column end"> {{ item.priceTotal }} &#8362;</span>
 
   <div class="item-image">
-  <img [src]="item.imagePath" [alt]="item.name">
+  <img [src]="BASE_URL + item.imagePath" [alt]="item.name">
   </div>
   <div fxLayoutAlign="end">
   <button mat-button (click)="onDeleteClick(cart._id!, item.itemId!)"><mat-icon>delete</mat-icon></button>

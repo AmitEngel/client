@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartItemModel } from 'src/app/models/cart-item.model';
 import { CartModel } from 'src/app/models/cart.model';
 import { ShopService } from 'src/app/services/shop.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-cart',
@@ -9,6 +10,8 @@ import { ShopService } from 'src/app/services/shop.service';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
+  BASE_URL = environment.apiUrl
+
   items: CartItemModel[] = [];
   cart!: CartModel;
   priceTotal: number = 0;

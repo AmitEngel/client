@@ -4,6 +4,7 @@ import { CartModel } from 'src/app/models/cart.model';
 import { ItemModel } from 'src/app/models/item.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { ShopService } from 'src/app/services/shop.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-item-list',
@@ -12,6 +13,7 @@ import { ShopService } from 'src/app/services/shop.service';
 })
 
 export class ItemListComponent implements OnInit {
+  BASE_URL = environment.apiUrl
 
   items: ItemModel[] = [];
   cart!: CartModel;
