@@ -1,0 +1,27 @@
+<div *ngFor="let item of items">
+  <span>{{ item.name }} - X {{ item.quantity }}</span>
+  <span fxLayoutAlign="column end"> {{ item.priceTotal }} &#8362;</span>
+
+  <div class="item-image">
+  <img [src]="item.imagePath" [alt]="item.name">
+  </div>
+  <div fxLayoutAlign="end">
+  <button mat-button (click)="onDeleteClick(cart._id!, item.itemId!)"><mat-icon>delete</mat-icon></button>
+</div>
+  <mat-divider></mat-divider>
+</div>
+<button
+  mat-raised-button
+  *ngIf="items.length > 0 && isOrderActive"
+  [routerLink]="['/order']"
+  >
+  Continue To Order
+</button>
+<button
+  mat-raised-button
+  *ngIf="!isOrderActive"
+  (click)="onBackToShopClick()"
+  [routerLink]="['/']"
+>
+  Back To Shop
+</button>

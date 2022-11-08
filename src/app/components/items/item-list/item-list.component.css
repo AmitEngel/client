@@ -1,0 +1,12 @@
+mat-card{
+  margin-top: 2em;
+}
+.item-image {
+  width: 10em;
+}
+
+.item-image img {
+  width: 100%;
+  height: 8em;
+}
+

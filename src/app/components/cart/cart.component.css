@@ -1,0 +1,9 @@
+
+.item-image {
+  display: inline-block;
+  width: 25%;
+}
+
+.item-image img {
+  width: 100%;
+}

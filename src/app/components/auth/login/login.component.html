@@ -1,0 +1,38 @@
+<mat-card>
+  <div *ngIf="isAuthenticated">
+    <h2>Congrats! You Are Registered!</h2>
+    <a routerLink="/" mat-stroked-button>Go shopping</a>
+  </div>
+  <form *ngIf="!isAuthenticated" (ngSubmit)="onLogin(loginForm)" #loginForm="ngForm">
+    <h1>Login</h1>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input
+      matInput
+      type="email"
+      placeholder="Please Enter Your Email"
+      ngModel
+      name="email"
+      #emailInput="ngModel"
+      required="true"
+      email="true" />
+      <mat-error *ngIf="emailInput.invalid">Please Enter a Valid Email</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input
+        type="password"
+        matInput
+        placeholder="Please Enter Your Password"
+        ngModel
+        name="password"
+        #passwordInput="ngModel"
+        required />
+      <mat-error *ngIf="passwordInput.invalid">Please Enter a Valid Password</mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" id="login">Login</button>
+  </form>
+  <div fxLayoutAlign="end">
+  <button mat-button routerLink="/auth/signup" id="signup">Not registered yet?</button>
+  </div>
+</mat-card>

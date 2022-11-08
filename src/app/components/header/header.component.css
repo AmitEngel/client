@@ -1,0 +1,23 @@
+ul {
+  padding: 2em;
+  margin: 0 1em;
+}
+
+li{
+  list-style: circle;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+.contact{
+  color: rgb(162, 66, 227);
+  background-color: white;
+  padding: 0.5em;
+  border-radius: 1em;
+}
+

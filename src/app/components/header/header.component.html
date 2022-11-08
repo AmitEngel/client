@@ -1,0 +1,18 @@
+<mat-toolbar style="height: 100px;" color="primary">
+  <span>
+    Project 4
+  </span>
+  <span class="spacer"></span>
+  <span class="contact">Contact us:</span>
+  <ul>
+    <li>
+      <a href="https://www.linkedin.com/in/amit-engel-9951b9240/"  target="blank">LinkedIn</a>
+    </li>
+    <li>
+      <a href="https://github.com/AmitEngel" target="blank">Github</a>
+    </li>
+  </ul>
+  <div>Hello {{ username || 'Guest' }} <br>
+  <button mat-raised-button (click)="onLogout()" *ngIf="userIsAuthenticated">Logout</button>
+  </div>
+</mat-toolbar>

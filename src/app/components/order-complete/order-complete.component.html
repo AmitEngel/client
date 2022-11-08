@@ -1,0 +1,59 @@
+<mat-card>
+  <form (ngSubmit)="onOrderClick(signupForm)" #signupForm="ngForm">
+    <div fxLayout="column">
+      <h2>Shipping Details</h2>
+    <mat-form-field appearance="outline">
+      <mat-label>City</mat-label>
+      <input
+      matInput
+      type="text"
+      placeholder="Please Enter Your City"
+      ngModel
+      name="city"
+      #cityInput="ngModel"
+      required="true"
+       />
+      <mat-error *ngIf="cityInput.invalid">Please Enter a Valid City</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Street</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="Please Enter Your Street"
+        ngModel
+        name="street"
+        #streetInput="ngModel"
+        required />
+      <mat-error *ngIf="streetInput.invalid">Please Enter a Valid City</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Shipping Date</mat-label>
+      <input
+        type="date"
+        matInput
+        placeholder="Please Enter Your Desired Shipping Date"
+        ngModel
+        name="desiredDate"
+        #dateInput="ngModel"
+        required />
+      <mat-error *ngIf="dateInput.invalid">Please Enter a Valid Date</mat-error>
+    </mat-form-field>
+    <h2>Payments</h2>
+    <mat-form-field appearance="outline">
+      <mat-label>Credit Card</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="Please Enter Your Credit Card Number"
+        ngModel
+        name="card"
+        #cardInput="ngModel"
+        required />
+      <mat-error *ngIf="cardInput.invalid">Please Enter a Valid Card Number</mat-error>
+    </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" type="submit">Order</button>
+  </form>
+</mat-card>
+

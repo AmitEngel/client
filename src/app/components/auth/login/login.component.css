@@ -1,0 +1,17 @@
+mat-card{
+  min-height: 100%;
+  background-color: rgba(55, 0, 255, 0.322);
+}
+mat-form-field{
+  width: 100%;
+}
+h1{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 2.5rem;
+  text-align: center;
+}
+#login{
+  display: block;
+  margin: 0 auto;
+}
+

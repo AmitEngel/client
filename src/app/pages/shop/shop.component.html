@@ -1,0 +1,5 @@
+<section fxLayout style="margin:5em 5em;" fxLayoutGap="20px">
+    <app-cart *ngIf="!isAdmin" fxFlex="30"></app-cart>
+    <app-item-list *ngIf="!isAdmin" fxFlex="70"></app-item-list>
+    <app-item-list *ngIf="isAdmin"></app-item-list>
+</section>
