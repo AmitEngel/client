@@ -22,23 +22,18 @@ export class CartComponent implements OnInit {
     this.shopService.getOrderStatus().subscribe(res => {
       this.isOrderActive = res
     })
-    this.shopService.getCart().subscribe(ca => {
-      console.log(ca)
-      this.shopService.setCart(ca)
-    })
     this.shopService.getCart$.subscribe(res => {
       this.cart = res
       this.items = res.items
     })
   }
 
-  onDeleteClick(cartId:string, itemId:string) {
+  onDeleteClick(cartId: string, itemId: string) {
+    console.log("cartId: " + cartId, "itemId: " + itemId)
     this.shopService.deleteItemFromCart(cartId, itemId).subscribe({
       next: (response) => {
         console.log(response);
-        this.shopService.getCart().subscribe(res => {
-          this.shopService.setCart(res)
-        });
+        this.shopService.setCart({ ...this.cart, items: this.cart.items.filter(item => item.itemId !== itemId) });
       },
     });
   }

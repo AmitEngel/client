@@ -41,7 +41,8 @@ export class ItemListComponent implements OnInit {
     })
   }
 
-  onAddToCart({name, price, imagePath, _id }: ItemModel) {
+  onAddToCart({ name, price, imagePath, _id }: ItemModel) {
+    console.log("cartId: " + this.cart._id, "itemId: " + _id)
     this.shopService
       .updateCart(this.cart._id!, { name, priceTotal:price, imagePath, quantity:1, itemId:_id })
       .subscribe((res) => {

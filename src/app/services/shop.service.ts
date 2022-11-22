@@ -51,7 +51,9 @@ export class ShopService {
   }
 
   getCart() {
-    return this.httpClient.get<CartModel>(BACKEND_URL + 'cart');
+    return this.httpClient.get<CartModel>(BACKEND_URL + 'cart').subscribe(res => {
+      this.cart.next(res)
+    });
   }
 
   createNewCart() {
@@ -109,7 +111,6 @@ export class ShopService {
   addItemToCart(item: CartItemModel) {
     const cartItem = this.cart.value.items.find((it) => item.name === it.name);
     if (cartItem) {
-      console.log(cartItem);
       this.cart.next({
         ...this.cart.value,
         items: this.cart.value.items.map((a) =>
@@ -137,7 +138,7 @@ export class ShopService {
   }
 
   deleteItemFromCart(cartId:string, itemId:string) {
-    return this.httpClient.delete(BACKEND_URL + cartId + '/' + itemId);
+    return this.httpClient.delete<{message:string, item:ItemModel}>(BACKEND_URL + cartId + '/' + itemId);
   }
 
   getOrderByUserId(userId:string) {

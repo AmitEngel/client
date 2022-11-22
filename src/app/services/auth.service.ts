@@ -28,7 +28,8 @@ export class AuthService {
   public checkToken() {
     if (localStorage.getItem('token')) {
        this.httpClient.get(BACKEND_URL + 'reload').subscribe((res) => {
-        this.user.next(res);
+         this.user.next(res);
+         this.authStatusListener.next(true)
       });
     }
   }

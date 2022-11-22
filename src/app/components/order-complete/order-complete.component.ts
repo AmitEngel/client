@@ -15,7 +15,7 @@ export class OrderCompleteComponent implements OnInit {
   constructor(private shopService: ShopService, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.shopService.getCart().subscribe((res) => (this.cart = res));
+    this.shopService.getCart();
     this.shopService.isOrderActive.next(false);
   }
   onOrderClick(form: NgForm) {

@@ -1,6 +1,6 @@
 <mat-card style="background-color:rgba(55, 0, 255, 0.322); min-height: 100%;">
-  <p>Availible Products In Our Store: <strong> {{items.length}}</strong></p>
-  <p *ngIf="cart && isAuthenticated">You Have Open Cart From: <strong> {{cart.dateCreated!}}</strong></p>
+  <p>Available Products In Our Store: <strong> {{items.length}}</strong></p>
+  <p *ngIf="cart && isAuthenticated">You Have Open Cart From: <strong> {{cart.dateCreated! | date:  'short' }}</strong></p>
   <strong *ngIf="!cart && isAuthenticated">You Don't Have A Cart Open Yet!</strong>
-  <p *ngIf="order && isAuthenticated">Your Last Purchase was on: <strong> {{order.dateCreated}}</strong></p>
+  <p *ngIf="order && isAuthenticated">Your Last Purchase was on: <strong> {{order.dateCreated | date: 'short'}}</strong></p>
 </mat-card>

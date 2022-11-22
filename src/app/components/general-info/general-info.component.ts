@@ -32,6 +32,9 @@ export class GeneralInfoComponent implements OnInit {
         this.userId = this.authService.getUserId();
         this.isAuthenticated = authStatus;
         if (this.isAuthenticated) {
+          this.shopService.getCart$.subscribe((cart) => {
+            this.cart = cart
+          });
           this.shopService.getOrderByUserId(this.userId!).subscribe(res => {
             console.log(res.orders[0]);
             this.order = res.orders[res.orders.length - 1];
