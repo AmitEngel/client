@@ -35,6 +35,8 @@ import { ItemCreateComponent } from './components/items/item-create/item-create.
 import { OrderComponent } from './pages/order/order.component';
 import { OrderCompleteComponent } from './components/order-complete/order-complete.component';
 import { OrderSuccessDialogComponent } from './components/order-success-dialog/order-success-dialog.component';
+import { ErrorComponent } from './error/error/error.component';
+import { ErrorInterceptor } from './error/error.interseptor';
 
 
 @NgModule({
@@ -53,6 +55,7 @@ import { OrderSuccessDialogComponent } from './components/order-success-dialog/o
     OrderComponent,
     OrderCompleteComponent,
     OrderSuccessDialogComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +78,9 @@ import { OrderSuccessDialogComponent } from './components/order-success-dialog/o
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
+  entryComponents: [ErrorComponent],
 })
 export class AppModule {}
