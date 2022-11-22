@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CartItemModel } from 'src/app/models/cart-item.model';
-import { Category } from 'src/app/models/category.model';
 import { ItemModel } from 'src/app/models/item.model';
 import { ShopService } from 'src/app/services/shop.service';
 
@@ -15,7 +14,6 @@ import { ShopService } from 'src/app/services/shop.service';
 })
 export class ItemCreateComponent implements OnInit {
   item!: ItemModel;
-  categories!: Category[]
   form!: FormGroup;
   itemId!: string | null;
   private mode = 'create';

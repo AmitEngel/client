@@ -25,9 +25,16 @@ export class ShopService {
   setCart(cart: CartModel) {
     return this.cart.next(cart);
   }
-  private orders$ = new BehaviorSubject<OrderModel[]>([])
+  private items = new BehaviorSubject<ItemModel[]>([]);
+  private _items!: ItemModel[];
+  getItems$ = this.items.asObservable();
+  setItems(items: ItemModel[]) {
+    return this.items.next(items);
+  }
+
+  private orders$ = new BehaviorSubject<OrderModel[]>([]);
   getOrders() {
-    return this.orders$.asObservable()
+    return this.orders$.asObservable();
   }
   isOrderActive = new BehaviorSubject(true);
   getOrderStatus() {
@@ -37,7 +44,21 @@ export class ShopService {
   constructor(private httpClient: HttpClient, private router: Router) {}
 
   getItems() {
-    return this.httpClient.get<{ items: ItemModel[] }>(BACKEND_URL);
+    return this.httpClient.get<{ items: ItemModel[] }>(BACKEND_URL).subscribe(res => {
+      this._items = res.items
+      this.setItems(res.items)
+    });
+  }
+
+  getCategories() {
+    return this.httpClient.get<string[]>(BACKEND_URL + 'categories');
+  }
+
+  filterByCategory(category: string) {
+    if (category === 'All') {
+      return this.setItems(this._items)
+    }
+    return this.setItems(this._items.filter(items => items.category === category))
   }
 
   getItemById(id: string) {
@@ -51,13 +72,17 @@ export class ShopService {
   }
 
   getCart() {
-    return this.httpClient.get<CartModel>(BACKEND_URL + 'cart').subscribe(res => {
-      this.cart.next(res)
-    });
+    return this.httpClient
+      .get<CartModel>(BACKEND_URL + 'cart')
+      .subscribe((res) => {
+        this.cart.next(res);
+      });
   }
 
   createNewCart() {
-   return this.httpClient.post<CartModel>(BACKEND_URL + 'cart', {dateCreated: new Date()})
+    return this.httpClient.post<CartModel>(BACKEND_URL + 'cart', {
+      dateCreated: new Date(),
+    });
   }
 
   createItem(name: string, price: number, category: string, image: File) {
@@ -105,7 +130,10 @@ export class ShopService {
   }
 
   deleteItemFromShop(itemId: string) {
-    return this.httpClient.delete(BACKEND_URL + 'delete/' + itemId)
+    return this.httpClient.delete(BACKEND_URL + 'delete/' + itemId).subscribe(res => {
+      this._items = this._items.filter(item => item._id != itemId)
+      this.setItems(this._items)
+    });
   }
 
   addItemToCart(item: CartItemModel) {
@@ -137,12 +165,16 @@ export class ShopService {
     return this.httpClient.put<CartItemModel>(BACKEND_URL + cartId, item);
   }
 
-  deleteItemFromCart(cartId:string, itemId:string) {
-    return this.httpClient.delete<{message:string, item:ItemModel}>(BACKEND_URL + cartId + '/' + itemId);
+  deleteItemFromCart(cartId: string, itemId: string) {
+    return this.httpClient.delete<{ message: string; item: ItemModel }>(
+      BACKEND_URL + cartId + '/' + itemId
+    );
   }
 
-  getOrderByUserId(userId:string) {
-    return this.httpClient.get<{message:string ,orders: OrderModel[] }>(BACKEND_URL + 'order/' + userId)
+  getOrderByUserId(userId: string) {
+    return this.httpClient.get<{ message: string; orders: OrderModel[] }>(
+      BACKEND_URL + 'order/' + userId
+    );
   }
 
   orderCart(order: OrderModel) {

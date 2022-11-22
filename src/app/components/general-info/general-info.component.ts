@@ -41,8 +41,8 @@ export class GeneralInfoComponent implements OnInit {
           })
         }
       });
-    this.shopService.getItems().subscribe((res) => {
-      this.items = res.items;
+    this.shopService.getItems$.subscribe((res) => {
+      this.items = res;
     });
   }
 }

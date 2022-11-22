@@ -17,6 +17,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatTabsModule } from '@angular/material/tabs';
+
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/auth/login/login.component';
@@ -25,6 +27,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { CartComponent } from './components/cart/cart.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthInterceptor } from './components/auth/auth.interceptor';
+import { ErrorInterceptor } from './error/error.interseptor';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { AboutComponent } from './components/about/about.component';
 import { GeneralInfoComponent } from './components/general-info/general-info.component';
@@ -36,7 +39,7 @@ import { OrderComponent } from './pages/order/order.component';
 import { OrderCompleteComponent } from './components/order-complete/order-complete.component';
 import { OrderSuccessDialogComponent } from './components/order-success-dialog/order-success-dialog.component';
 import { ErrorComponent } from './error/error/error.component';
-import { ErrorInterceptor } from './error/error.interseptor';
+
 
 
 @NgModule({
@@ -75,6 +78,7 @@ import { ErrorInterceptor } from './error/error.interseptor';
     MatExpansionModule,
     MatDividerModule,
     MatDialogModule,
+    MatTabsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

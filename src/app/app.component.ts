@@ -21,5 +21,6 @@ export class AppComponent implements OnInit {
         this.shopService.getCart()
       }
     })
+    this.shopService.getItems()
   }
 }
