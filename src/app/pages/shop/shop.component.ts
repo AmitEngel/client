@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { ShopService } from 'src/app/services/shop.service';
 
 @Component({
   selector: 'app-shop',
@@ -12,7 +13,7 @@ export class ShopComponent implements OnInit, OnDestroy {
   private authStatusSub!: Subscription;
   userId!: string | null;
   isAdmin = false
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private shopService:ShopService) {}
 
   ngOnInit(): void {
     this.authService.getUser().subscribe((res) => {
@@ -27,6 +28,12 @@ export class ShopComponent implements OnInit, OnDestroy {
         this.userIsAuthenticated = isAuthenticated;
       });
   }
+
+  onSearch(word: string) {
+    console.log(word)
+    this.shopService.filterBySearch(word)
+  }
+
   ngOnDestroy(): void {
     this.authStatusSub.unsubscribe();
   }

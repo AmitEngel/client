@@ -61,6 +61,11 @@ export class ShopService {
     return this.setItems(this._items.filter(items => items.category === category))
   }
 
+  filterBySearch(searchWord:string) {
+    const regex = new RegExp(searchWord, 'gi')
+    return this.setItems(this._items.filter(item => item.name.match(regex)))
+  }
+
   getItemById(id: string) {
     return this.httpClient.get<{
       _id: string;

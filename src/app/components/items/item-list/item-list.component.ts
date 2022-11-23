@@ -18,6 +18,7 @@ export class ItemListComponent implements OnInit {
   cart!: CartModel;
   categories!: string[];
   isAdmin: boolean = false;
+  searchText!: string;
   constructor(
     private shopService: ShopService,
     private authService: AuthService
