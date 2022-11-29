@@ -44,10 +44,12 @@ export class ShopService {
   constructor(private httpClient: HttpClient, private router: Router) {}
 
   getItems() {
-    return this.httpClient.get<{ items: ItemModel[] }>(BACKEND_URL).subscribe(res => {
-      this._items = res.items
-      this.setItems(res.items)
-    });
+    return this.httpClient
+      .get<{ items: ItemModel[] }>(BACKEND_URL)
+      .subscribe((res) => {
+        this._items = res.items;
+        this.setItems(res.items);
+      });
   }
 
   getCategories() {
@@ -56,14 +58,16 @@ export class ShopService {
 
   filterByCategory(category: string) {
     if (category === 'All') {
-      return this.setItems(this._items)
+      return this.setItems(this._items);
     }
-    return this.setItems(this._items.filter(items => items.category === category))
+    return this.setItems(
+      this._items.filter((items) => items.category === category.toLowerCase())
+    );
   }
 
-  filterBySearch(searchWord:string) {
-    const regex = new RegExp(searchWord, 'gi')
-    return this.setItems(this._items.filter(item => item.name.match(regex)))
+  filterBySearch(searchWord: string) {
+    const regex = new RegExp(searchWord, 'gi');
+    return this.setItems(this._items.filter((item) => item.name.match(regex)));
   }
 
   getItemById(id: string) {
@@ -135,10 +139,12 @@ export class ShopService {
   }
 
   deleteItemFromShop(itemId: string) {
-    return this.httpClient.delete(BACKEND_URL + 'delete/' + itemId).subscribe(res => {
-      this._items = this._items.filter(item => item._id != itemId)
-      this.setItems(this._items)
-    });
+    return this.httpClient
+      .delete(BACKEND_URL + 'delete/' + itemId)
+      .subscribe((res) => {
+        this._items = this._items.filter((item) => item._id != itemId);
+        this.setItems(this._items);
+      });
   }
 
   addItemToCart(item: CartItemModel) {
@@ -168,6 +174,31 @@ export class ShopService {
 
   updateCart(cartId: string, item: CartItemModel) {
     return this.httpClient.put<CartItemModel>(BACKEND_URL + cartId, item);
+  }
+
+  subtractItemFromCart(item: CartItemModel) {
+    const cartItem = this.cart.value.items.find((it) => item.name === it.name);
+    if (cartItem) {
+      this.cart.next({
+        ...this.cart.value,
+        items: this.cart.value.items.map((a) =>
+          a.name === item.name
+            ? {
+                itemId: a.itemId,
+                imagePath: a.imagePath,
+                name: a.name,
+                priceTotal: a.priceTotal - item.priceTotal,
+                quantity: a.quantity - item.quantity,
+              }
+            : a
+        ),
+      });
+    } else {
+      this.cart.next({
+        ...this.cart.value,
+        items: [...this.cart.value.items, item],
+      });
+    }
   }
 
   deleteItemFromCart(cartId: string, itemId: string) {

@@ -1,23 +1,30 @@
 <div *ngFor="let item of items">
-  <span>{{ item.name }} - X {{ item.quantity }}</span>
-  <span fxLayoutAlign="column end"> {{ item.priceTotal }} &#8362;</span>
-
+  <strong>{{ item.name }} - X {{ item.quantity }}</strong>
+  <span fxLayoutAlign="column end"> {{ item.priceTotal | number:"1.2" }} &#8362;</span>
   <div class="item-image">
   <img [src]="BASE_URL + item.imagePath" [alt]="item.name">
   </div>
+  <button *ngIf="isOrderActive" mat-button (click)="onSubtractClick(item)"><mat-icon>remove_circle_outline</mat-icon></button>
+  <button *ngIf="isOrderActive" mat-button (click)="onAddClick(item)"><mat-icon>add_circle_outline</mat-icon></button>
   <div *ngIf="isOrderActive" fxLayoutAlign="end">
   <button mat-button (click)="onDeleteClick(cart._id!, item.itemId!)"><mat-icon>delete</mat-icon></button>
 </div>
   <mat-divider></mat-divider>
 </div>
+<div *ngIf="items.length > 0"><strong>Total Price: {{priceTotal | number:"1.2"}} &#8362;</strong></div>
+<div fxLayoutAlign="end" style="margin-bottom:2em;">
 <button
+[class.mat-elevation-z5]="true"
   mat-raised-button
   *ngIf="items.length > 0 && isOrderActive"
   [routerLink]="['/order']"
   >
   Continue To Order
 </button>
+</div>
+<div fxLayoutAlign="end" style="margin-bottom:2em;">
 <button
+[class.mat-elevation-z5]="true"
   mat-raised-button
   *ngIf="!isOrderActive"
   (click)="onBackToShopClick()"
@@ -25,3 +32,4 @@
 >
   Back To Shop
 </button>
+</div>
