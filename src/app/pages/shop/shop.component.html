@@ -1,5 +1,8 @@
-<mat-form-field style="margin:1em 15%;" appearance="fill">
-  <input #word (change)="onSearch(word.value)" matInput placeholder="Search by Name">
+<mat-form-field style="margin:1em 15%;" appearance="outline">
+  <input type="search" #word (change)="onSearch(word.value)" matInput placeholder="Search by Name">
+  <!-- <button *ngIf="word.value" matSuffix mat-icon-button (click)="word.value='' && onSearch(word.value)">
+    <mat-icon>close</mat-icon>
+  </button> -->
 </mat-form-field>
 <section fxLayout style="margin:0 5em;" fxLayoutGap="20px">
     <app-cart *ngIf="!isAdmin" fxFlex="30"></app-cart>

@@ -19,6 +19,7 @@ export class OrderCompleteComponent implements OnInit {
     this.shopService.isOrderActive.next(false);
   }
   onOrderClick(form: NgForm) {
+    this.shopService.getCart$.subscribe(res => this.cart = res)
     console.log(this.cart);
     this.shopService
       .orderCart({
@@ -33,6 +34,9 @@ export class OrderCompleteComponent implements OnInit {
           .map((it) => it.priceTotal)
           .reduce((a, b) => a + b),
       })
-      .subscribe((orderData) => this.dialog.open(OrderSuccessDialogComponent));
+      .subscribe((orderData) => {
+        console.log(orderData)
+        this.dialog.open(OrderSuccessDialogComponent)
+      });
   }
 }

@@ -5,7 +5,7 @@
   <div class="item-image">
   <img [src]="BASE_URL + item.imagePath" [alt]="item.name">
   </div>
-  <div fxLayoutAlign="end">
+  <div *ngIf="isOrderActive" fxLayoutAlign="end">
   <button mat-button (click)="onDeleteClick(cart._id!, item.itemId!)"><mat-icon>delete</mat-icon></button>
 </div>
   <mat-divider></mat-divider>

@@ -1,6 +1,6 @@
 <mat-toolbar style="height: 100px;" color="primary">
   <span>
-    Project 4
+    Best Shopping
   </span>
   <span class="spacer"></span>
   <span class="contact">Contact us:</span>
@@ -12,7 +12,7 @@
       <a href="https://github.com/AmitEngel" target="blank">Github</a>
     </li>
   </ul>
-  <div>Hello {{ username || 'Guest' }} <br>
+  <div>Hello {{ username || 'Guest' | titlecase}}!<br>
   <button mat-raised-button (click)="onLogout()" *ngIf="userIsAuthenticated">Logout</button>
   </div>
 </mat-toolbar>
